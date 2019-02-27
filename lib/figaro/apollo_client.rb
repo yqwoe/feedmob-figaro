@@ -14,7 +14,7 @@ module Figaro
 
     def start
       p '[Apollo] start pulling configurations...'
-      check_file do |file|
+      file_loop do |file|
         result = response
         message = result['message']
 
@@ -28,12 +28,10 @@ module Figaro
       end
     end
 
-    def check_file
+    def file_loop
       CONFIG_FILE.each do |file|
-        if File.exist?("config/#{file}")
-          @url = url(file)
-          yield(file)
-        end
+        @url = url(file)
+        yield(file)
       end
     end
 
