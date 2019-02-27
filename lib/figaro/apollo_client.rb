@@ -15,6 +15,7 @@ module Figaro
     def start
       p '[Apollo] start pulling configurations...'
       file_loop do |file|
+        p "[Apollo] start pulling #{file} ..."
         result = response
         message = result['message']
 
@@ -23,7 +24,7 @@ module Figaro
           release_key = result['releaseKey']
           write_yml(file, configurations, release_key)
         else
-          p "[Apollo] #{message}"
+          p "[Apollo Center Return] #{message}"
         end
       end
     end
@@ -37,7 +38,7 @@ module Figaro
 
     def write_yml(file, configs, release_key)
       if configs.strip.empty?
-        p "[Apollo] Skip write #{file} with blank configs by relase: #{release_key}"
+        p "[Apollo] Skip write #{file} with blank configs by release: #{release_key}"
         return
       end
       File.write("config/#{file}", configs)
