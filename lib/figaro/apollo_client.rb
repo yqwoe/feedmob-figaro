@@ -5,15 +5,24 @@ module Figaro
       'sidekiq.yml'
     ].freeze
 
-    def initialize
-      @host = ENV['APOLLO_HOST'] || 'http://configservice.apollo:8080'
-      @appId = ENV['APOLLO_APP_ID'] || 'feedmob-time-off'
-      @cluster = ENV['APOLLO_CLUSTER'] || 'default'
-      # @namespace = ENV['APOLLO_NAMESPACE'] || 'application.yml'
+    def initialize(host, appId, cluster)
+      @host = host
+      @appId = appId
+      @cluster = cluster
     end
 
     def start
-      p '[Apollo] start pulling configurations...'
+      p "[Apollo] start pulling configurations... \
+        host: #{@host} \
+        appId: #{@appId} \
+        cluster: #{@cluster} \
+        "
+
+      if @appId.strip.empty?
+        p '[Apollo] appId can not be nil'
+        return
+      end
+
       file_loop do |file|
         p "[Apollo] start pulling #{file} ..."
         result = response
