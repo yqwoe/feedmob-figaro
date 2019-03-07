@@ -5,9 +5,10 @@ module Figaro
     class Railtie < ::Rails::Railtie
       config.before_configuration do
         begin
-          host = ::ENV['APOLLO_HOST'] || 'http://configservice.apollo:8080'
-          appId = ::ENV['APOLLO_APP_ID']
-          cluster = ::ENV['APOLLO_CLUSTER'] || 'default'
+          configs = YAML.load_file('config/apollo.yml')
+          host = configs['APOLLO_HOST']
+          appId = configs['APOLLO_APP_ID']
+          cluster = configs['APOLLO_CLUSTER']
 
           if ::Rails.env.stage? || ::Rails.env.production?
             Figaro::ApolloClient.new(host, appId, cluster).start
