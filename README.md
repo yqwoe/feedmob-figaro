@@ -37,7 +37,7 @@ If Apollo has configured, after this will overwrite local `config/application.ym
 
 ### Tip
 This Gem start when rails before configuration,
-If you single start sidekiq, Please pull sart rails server first.
+If you single start sidekiq, Please start rails server first.
 
 ### Using in development
 
