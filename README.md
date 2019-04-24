@@ -16,15 +16,28 @@ gem 'figaro', git: "https://github.com/feed-mob/feedmob-figaro", branch: 'master
 
 ### Using exclude development
 
-It detected and used ENV named `ENV['APOLLO_HOST']`, `ENV['APOLLO_APP_ID']`, `ENV['APOLLO_CLUSTER']`,
-when you execute `rails c` or `rails s` within `ENV` variables.
-Just like `RAILS_ENV=stage rails s`.
+It load ```apollo.yml``` to config apollo configuration center.
 
-```bash
-APOLLO_HOST='https://your_host' APOLLO_APP_ID='your_application_id'
-APOLLO_CLUSTER='your_cluster_name' rails s
+example:
+
 ```
+APOLLO_CLUSTER: default
+APOLLO_APP_ID: feedmob-XXX
+APOLLO_HOST: http://localhost:8080
+
+ stage:
+  APOLLO_HOST: http://xxx.com:8080
+
+ production:
+  APOLLO_HOST: http://xxx.com:8080
+
+```
+
 If Apollo has configured, after this will overwrite local `config/application.yml` and `config/sidekiq.yml`
+
+### Tip
+This Gem start when rails before configuration,
+If you single start sidekiq, Please pull sart rails server first.
 
 ### Using in development
 
