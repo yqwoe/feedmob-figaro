@@ -46,7 +46,7 @@ module Figaro
     end
 
     def write_yml(file, configs, release_key)
-      if configs.strip.empty?
+      if !configs || configs.strip.empty?
         p "[Apollo] Skip write #{file} with blank configs by release: #{release_key}"
         return
       end
