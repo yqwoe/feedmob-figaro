@@ -12,9 +12,10 @@ module Figaro
           host = ::ENV['APOLLO_HOST']
           appId = ::ENV['APOLLO_APP_ID']
           cluster = ::ENV['APOLLO_CLUSTER']
+          custom_config_file = ::ENV['APOLLO_CUSTOM_CONFIG_FILE']
 
           if ::Rails.env.stage? || ::Rails.env.production?
-            Figaro::ApolloClient.new(host, appId, cluster).start
+            Figaro::ApolloClient.new(host, appId, cluster, custom_config_file).start
           end
         rescue => e
           p "[Apollo] start error: #{e}"

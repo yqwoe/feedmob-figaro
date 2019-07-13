@@ -5,10 +5,11 @@ module Figaro
       'sidekiq.yml'
     ].freeze
 
-    def initialize(host, appId, cluster)
+    def initialize(host, appId, cluster, custom_config_file)
       @host = host
       @appId = appId
       @cluster = cluster
+      @custom_config_file = custom_config_file.present? ? [YAML.load(custom_config_file)].flatten : []
     end
 
     def start
@@ -39,7 +40,7 @@ module Figaro
     end
 
     def file_loop
-      CONFIG_FILE.each do |file|
+      (CONFIG_FILE + @custom_config_file).uniq.each do |file|
         @url = url(file)
         yield(file)
       end

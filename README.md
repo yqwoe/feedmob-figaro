@@ -24,6 +24,7 @@ example:
 APOLLO_CLUSTER: default
 APOLLO_APP_ID: feedmob-XXX
 APOLLO_HOST: http://localhost:8080
+APOLLO_CUSTOM_CONFIG_FILE: ''
 
  stage:
   APOLLO_HOST: http://xxx.com:8080
