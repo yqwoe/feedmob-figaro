@@ -37,8 +37,9 @@ APOLLO_CUSTOM_CONFIG_FILE: ''
 If Apollo has configured, after this will overwrite local `config/application.yml` and `config/sidekiq.yml`
 
 ### Tip
-This Gem start when rails before configuration,
-If you single start sidekiq, Please start rails server first.
+- This Gem start when rails before configuration,
+- If you single start sidekiq, Please start rails server first.
+- Add prefix `SKIP_APOLLO=true` to the command If you want to run a command on stage/production environment without downloading apollo configurations
 
 ### Using in development
 
