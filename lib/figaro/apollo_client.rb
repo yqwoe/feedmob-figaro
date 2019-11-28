@@ -1,3 +1,5 @@
+require "net/http"
+
 module Figaro
   class ApolloClient
     CONFIG_FILE = [
