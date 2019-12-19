@@ -1,24 +1,40 @@
 require 'figaro/apollo_client'
+require 'figaro/apollo_portal'
 require 'figaro/rails/apollo_config'
+require 'figaro/rails/apollo_credential'
 
 module Figaro
   module Rails
     class Railtie < ::Rails::Railtie
       config.before_configuration do
         begin
-          # load apollo.yml
+          # Load apollo.yml
           ApolloConfig.new.load
+          # Load credentials
+          ApolloCredential.new.load
 
           host = ::ENV['APOLLO_HOST']
+          env = ::ENV['APOLLO_ENV']
           appId = ::ENV['APOLLO_APP_ID']
           cluster = ::ENV['APOLLO_CLUSTER']
-          custom_config_file = ::ENV['APOLLO_CUSTOM_CONFIG_FILE']
+          namespaces = ::ENV['APOLLO_NAMESPACES']
+          credentail = ::ENV[appId]
+
+          options = {
+            host: host,
+            env: env,
+            app_id: appId,
+            cluster_name: cluster,
+            namespace_names: namespaces.split(',').map { |item| item.strip },
+            credentail: credentail
+
+          }
 
           if ::ENV['SKIP_APOLLO'].blank? && (::Rails.env.stage? || ::Rails.env.production?)
-            Figaro::ApolloClient.new(host, appId, cluster, custom_config_file).start
+            Figaro::ApolloPortal.new(**options).start
           end
         rescue => e
-          p "[Apollo] start error: #{e}"
+          puts "[Apollo] start error: #{e}"
         ensure
           Figaro.load
         end
