@@ -1,7 +1,7 @@
 require 'figaro/apollo_client'
 require 'figaro/apollo_portal'
 require 'figaro/rails/apollo_config'
-require 'figaro/rails/apollo_credential'
+require 'figaro/rails/apollo_credentials'
 
 module Figaro
   module Rails
@@ -11,7 +11,7 @@ module Figaro
           # Load apollo.yml
           ApolloConfig.new.load
           # Load credentials
-          ApolloCredential.new.load
+          ApolloCredentials.new.load
 
           host = ::ENV['APOLLO_HOST']
           env = ::ENV['APOLLO_ENV']

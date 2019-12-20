@@ -41,7 +41,7 @@ module Figaro
     end
 
     def write_yml(file_name, file_content, timestamp)
-      File.write("config/#{file_name}.test", file_content)
+      File.write("config/#{file_name}", file_content)
       puts "#{INFO_PREFIX} writed to local successfully with last modified time: #{timestamp}"
     end
 
