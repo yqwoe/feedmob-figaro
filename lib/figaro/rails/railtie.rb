@@ -18,7 +18,7 @@ module Figaro
           appId = ::ENV['APOLLO_APP_ID']
           cluster = ::ENV['APOLLO_CLUSTER']
           namespaces = ::ENV['APOLLO_NAMESPACES']
-          credentail = ::ENV[appId]
+          credentails = ::ENV[appId]
 
           options = {
             host: host,
@@ -26,7 +26,7 @@ module Figaro
             app_id: appId,
             cluster_name: cluster,
             namespace_names: namespaces.split(',').map { |item| item.strip },
-            credentail: credentail
+            credentails: credentails
 
           }
 

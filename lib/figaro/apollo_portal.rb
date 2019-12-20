@@ -51,7 +51,7 @@ module Figaro
 
       Net::HTTP.start(uri.host, uri.port,
         :use_ssl => uri.scheme == 'https') do |http|
-        request = Net::HTTP::Get.new uri, "Authorization" => "#{@credentail}"
+        request = Net::HTTP::Get.new uri, "Authorization" => "#{@credentails}"
 
         http.request(request)
       end
