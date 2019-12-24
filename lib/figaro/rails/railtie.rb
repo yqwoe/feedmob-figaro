@@ -1,4 +1,3 @@
-require 'figaro/apollo_client'
 require 'figaro/apollo_portal'
 require 'figaro/rails/apollo_config'
 require 'figaro/rails/apollo_credentials'

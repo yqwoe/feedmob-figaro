@@ -1,8 +1,8 @@
 module Figaro
   module Rails
     class ApolloCredentials < Figaro::Application
-      private 
-      
+      private
+
       def default_path
         rails_not_initialized! unless ::Rails.root
 

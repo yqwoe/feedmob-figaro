@@ -28,7 +28,7 @@ module Figaro
                OR Add it on Apollo Center"
           next
         end
-        
+
         res_body = JSON.parse(response.body)
         if !res_body['message'].blank?
           puts "#{INFO_PREFIX} Return: #{res_body['message']}"
