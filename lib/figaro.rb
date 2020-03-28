@@ -25,9 +25,9 @@ module Figaro
   def load
     begin
       # Load apollo.yml
-      ApolloConfig.new.load
+      Figaro::Rails::ApolloConfig.new.load
       # Load credentials
-      ApolloCredentials.new.load
+      Figaro::Rails::ApolloCredentials.new.load
 
       host = ::ENV['APOLLO_HOST']
       env = ::ENV['APOLLO_ENV']
@@ -50,7 +50,7 @@ module Figaro
         Figaro::ApolloPortal.new(**options).start
       end
     rescue => e
-        puts "[Apollo] start error: #{e}"
+      puts "[Apollo] start error: #{e}"
     ensure
       application.load
     end
