@@ -57,7 +57,7 @@ module Figaro
         credentails: credentails
       }
 
-      if options.values.exclude?(nil) &&
+      if !options.values.include?(nil) &&
           ::ENV['SKIP_APOLLO'].blank? &&
           (::Rails.env.stage? || ::Rails.env.production?)
         Figaro::ApolloPortal.new(**options).start
