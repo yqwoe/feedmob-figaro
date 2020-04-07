@@ -2,13 +2,10 @@ require "figaro/error"
 require "figaro/env"
 require "figaro/application"
 require 'figaro/apollo_portal'
-require 'figaro/rails/apollo_config'
-require 'figaro/rails/apollo_credentials'
 
 module Figaro
   extend self
-
-  attr_writer :adapter, :application
+  attr_writer :adapter, :application, :apollo_config, :apollo_credential, :apollo_config_adapter, :apollo_credential_adapter
 
   def env
     Figaro::ENV
@@ -22,15 +19,30 @@ module Figaro
     @application ||= adapter.new
   end
 
+  def apollo_config_adapter
+    @apollo_config_adapter ||= Figaro::Application
+  end
+
+  def apollo_config
+    @apollo_config ||= apollo_config_adapter.new
+  end
+
+  def apollo_credential_adapter
+    @apollo_credential_adapter ||= Figaro::Application
+  end
+
+  def apollo_credential
+    @apollo_credential ||= apollo_credential_adapter.new
+  end
+
   def load
     begin
-      # Load apollo.yml
-      Figaro::Rails::ApolloConfig.new.load
-      # Load credentials
-      Figaro::Rails::ApolloCredentials.new.load
+      # Initilize Apollo configuration
+      apollo_config.load
+      apollo_credential.load
 
       host = ::ENV['APOLLO_HOST']
-      env = ::ENV['APOLLO_ENV']
+      apollo_env = ::ENV['APOLLO_ENV']
       appId = ::ENV['APOLLO_APP_ID']
       cluster = ::ENV['APOLLO_CLUSTER']
       namespaces = ::ENV['APOLLO_NAMESPACES']
@@ -38,15 +50,15 @@ module Figaro
 
       options = {
         host: host,
-        env: env,
+        env: apollo_env,
         app_id: appId,
         cluster_name: cluster,
         namespace_names: namespaces.split(',').map { |item| item.strip },
         credentails: credentails
-
       }
 
-      if ::ENV['SKIP_APOLLO'].blank? && (::Rails.env.stage? || ::Rails.env.production?)
+      if !options.values.include?(nil) &&
+          ::ENV['SKIP_APOLLO'].blank?
         Figaro::ApolloPortal.new(**options).start
       end
     rescue => e
