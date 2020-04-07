@@ -58,8 +58,7 @@ module Figaro
       }
 
       if !options.values.include?(nil) &&
-          ::ENV['SKIP_APOLLO'].blank? &&
-          (::Rails.env.stage? || ::Rails.env.production?)
+          ::ENV['SKIP_APOLLO'].blank?
         Figaro::ApolloPortal.new(**options).start
       end
     rescue => e
