@@ -47,6 +47,8 @@ module Figaro
       cluster = ::ENV['APOLLO_CLUSTER']
       namespaces = ::ENV['APOLLO_NAMESPACES']
       credentails = ::ENV[appId]
+      
+      puts host, apollo_env, appId,cluster, namespaces, credentails
 
       options = {
         host: host,
@@ -61,7 +63,7 @@ module Figaro
           ::ENV['SKIP_APOLLO'].blank?
         Figaro::ApolloPortal.new(**options).start
       end
-    # rescue => e
+     rescue => e
     #   puts "[Apollo] start error: #{e}"
     ensure
       application.load
