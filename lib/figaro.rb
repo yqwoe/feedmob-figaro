@@ -61,8 +61,8 @@ module Figaro
           ::ENV['SKIP_APOLLO'].blank?
         Figaro::ApolloPortal.new(**options).start
       end
-    rescue => e
-      puts "[Apollo] start error: #{e}"
+    # rescue => e
+    #   puts "[Apollo] start error: #{e}"
     ensure
       application.load
     end
