@@ -48,7 +48,7 @@ module Figaro
       namespaces = ::ENV['APOLLO_NAMESPACES']
       credentails = ::ENV[appId]
       
-      puts host, apollo_env, appId,cluster, namespaces, credentails
+      puts host, apollo_env, appId, cluster, namespaces, credentails
 
       options = {
         host: host,
@@ -65,6 +65,7 @@ module Figaro
       end
      rescue => e
       puts "[Apollo] start error: #{e}"
+      puts 'test...................'
       puts "#{e.backtrace}"
     ensure
       application.load
