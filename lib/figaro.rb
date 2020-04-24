@@ -64,7 +64,8 @@ module Figaro
         Figaro::ApolloPortal.new(**options).start
       end
      rescue => e
-    #   puts "[Apollo] start error: #{e}"
+      puts "[Apollo] start error: #{e}"
+      puts "#{e.backtrace}"
     ensure
       application.load
     end
