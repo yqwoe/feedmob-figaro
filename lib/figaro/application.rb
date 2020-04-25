@@ -53,10 +53,9 @@ module Figaro
 
     def raw_configuration
       puts 'raw_configuration.........'
-      puts @parsed
       puts Hash.new { |hash, path| hash[path] = parse(path) }
       puts path
-      (@parsed ||= Hash.new { |hash, path| hash[path] = parse(path) })[path]
+      (Hash.new { |hash, path| hash[path] = parse(path) })[path]
     end
 
     def parse(path)
