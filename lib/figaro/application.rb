@@ -52,6 +52,10 @@ module Figaro
     end
 
     def raw_configuration
+      puts 'raw_configuration.........'
+      puts @parsed
+      puts Hash.new { |hash, path| hash[path] = parse(path) }
+      puts path
       (@parsed ||= Hash.new { |hash, path| hash[path] = parse(path) })[path]
     end
 
@@ -61,11 +65,12 @@ module Figaro
     end
 
     def global_configuration
-      puts raw_configuration
+      puts 'global.............'
       raw_configuration.reject { |_, value| value.is_a?(Hash) }
     end
 
     def environment_configuration
+      puts 'environment.............'
       raw_configuration[environment] || {}
     end
 
