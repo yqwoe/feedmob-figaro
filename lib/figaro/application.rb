@@ -57,6 +57,7 @@ module Figaro
     end
 
     def parse(path)
+      puts path
       File.exist?(path) && YAML.load(ERB.new(File.read(path)).result) || {}
     end
 

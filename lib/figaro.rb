@@ -38,9 +38,6 @@ module Figaro
   def load
     begin
       # Initilize Apollo configuration
-      puts apollo_config
-      puts apollo_credential
-      puts appliication
       apollo_config.load
       apollo_credential.load
 
