@@ -53,13 +53,12 @@ module Figaro
 
     def raw_configuration
       puts 'raw_configuration.........'
-      puts Hash.new { |hash, path| hash[path] = parse(path) }
-      puts path
       (Hash.new { |hash, path| hash[path] = parse(path) })[path]
     end
 
     def parse(path)
-      puts path
+      puts "path: #{path}"
+      puts File.exist?(path)
       File.exist?(path) && YAML.load(ERB.new(File.read(path)).result) || {}
     end
 
