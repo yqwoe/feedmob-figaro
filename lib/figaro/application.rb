@@ -1,6 +1,5 @@
 require "erb"
 require "yaml"
-
 module Figaro
   class Application
     FIGARO_ENV_PREFIX = "_FIGARO_"
@@ -62,6 +61,7 @@ module Figaro
     end
 
     def global_configuration
+      puts raw_configuration
       raw_configuration.reject { |_, value| value.is_a?(Hash) }
     end
 

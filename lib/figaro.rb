@@ -41,7 +41,9 @@ module Figaro
       apollo_config.load
       apollo_credential.load
 
-      puts ::ENV
+      puts 'load...........'
+      puts ::ENV['APOLLO_HOST']
+      puts ENV['APOLLO_HOST']
       host = ::ENV['APOLLO_HOST']
       apollo_env = ::ENV['APOLLO_ENV']
       appId = ::ENV['APOLLO_APP_ID']
