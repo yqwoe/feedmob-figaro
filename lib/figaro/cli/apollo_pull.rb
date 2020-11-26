@@ -1,8 +1,6 @@
-# require "figaro/cli/task"
 require "figaro/application"
 require 'figaro/apollo_portal'
 require 'figaro/apollo_params'
-require 'pry'
 
 module Figaro
   class CLI < Thor
