@@ -2,6 +2,7 @@ require "figaro/error"
 require "figaro/env"
 require "figaro/application"
 require 'figaro/apollo_portal'
+require 'figaro/apollo_params'
 
 module Figaro
   extend self
@@ -41,21 +42,7 @@ module Figaro
       apollo_config.load
       apollo_credential.load
 
-      host = ::ENV['APOLLO_HOST']
-      apollo_env = ::ENV['APOLLO_ENV']
-      appId = ::ENV['APOLLO_APP_ID']
-      cluster = ::ENV['APOLLO_CLUSTER']
-      namespaces = ::ENV['APOLLO_NAMESPACES']
-      credentails = ::ENV[appId]
-
-      options = {
-        host: host,
-        env: apollo_env,
-        app_id: appId,
-        cluster_name: cluster,
-        namespace_names: namespaces.split(',').map { |item| item.strip },
-        credentails: credentails
-      }
+      options = Figaro::ApolloParams.new.params
 
       if !options.values.include?(nil) &&
           ::ENV['SKIP_APOLLO'].blank?
