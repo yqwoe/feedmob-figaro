@@ -1,4 +1,5 @@
 require 'net/http'
+require 'json'
 
 module Figaro
   class ApolloPortal
@@ -30,7 +31,7 @@ module Figaro
         end
 
         res_body = JSON.parse(response.body)
-        if !res_body['message'].blank?
+        if !res_body['message'].nil? && res_body['message'] != ''
           puts "#{INFO_PREFIX} Return: #{res_body['message']}"
           next
         end
@@ -42,7 +43,7 @@ module Figaro
 
     def write_yml(file_name, file_content, timestamp)
       File.write("config/#{file_name}", file_content)
-      puts "#{INFO_PREFIX} writed to local successfully with last modified time: #{timestamp}"
+      puts "#{INFO_PREFIX} writed #{file_name} to local successfully with last modified time: #{timestamp}"
     end
 
     def get_response(file_name)
